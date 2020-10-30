@@ -36,15 +36,62 @@ header a#logo {
   border: none;
 }
 
+/* home */
 .home,
 .about {
   padding: 2rem 2.5rem;
 }
+/* about */
 .about p {
   font-size: 1.2rem;
   line-height: 2rem;
 }
 
+/* .login */
+.login {
+  display: grid;
+  place-items: center;
+}
+
+.input_field {
+  padding: 7px 0;
+}
+
+form {
+  border: 1px solid #ccc;
+  padding: 1.2rem 1.4rem;
+  border-radius: 7px;
+  box-shadow: 0 0 24px rgb(201, 199, 199);
+  margin-top: 5rem;
+}
+form label {
+  color: #555;
+  font-size: 1.1rem;
+  font-family: arial;
+  display: block;
+  margin: 10px 0;
+}
+form input {
+  padding: 7px 10px;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: #eee;
+}
+form button {
+  width: 100%;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding: 0.4rem 0;
+  margin-top: 10px;
+}
+form span.error {
+  color: tomato;
+  display: block;
+}
+
+/* footer */
 footer {
   margin-top: auto;
   border-top: 1px solid #333;

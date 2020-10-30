@@ -1,20 +1,23 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
+dotenv.config();
 const hbs = require("hbs");
 const authRoutes = require("./routes/authRoutes");
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 5000;
 
 // middlewares and view engine
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static("public"));
 app.set("view engine", "hbs");
 hbs.registerPartials("./views/partials");
 
 // database connection
-const dburi =
-  "mongodb+srv://truncation:popsot@123@cluster0.xbb17.mongodb.net/node-auth";
+const dburi = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xbb17.mongodb.net/node-auth`;
 mongoose
   .connect(dburi, {
     useNewUrlParser: true,
@@ -32,4 +35,20 @@ app.get("/about", (req, res) => res.render("about"));
 app.get("/dashboard", (req, res) => res.render("dashboard"));
 app.use(authRoutes);
 
-// app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
+// -------- Unnecessary codes. Only for knowledge --------------
+app.get("/set-cookies", (req, res) => {
+  // secure: true -> cookie is only be sent over 'https' secure connection
+  // httpOnly: true -> i.e we can't access cookie from front-end javascript
+  // res.cookie("newUser", false, { maxAge: 1000 * 60 * 60 * 24, secure: true, httpOnly: true });
+  // both of them are important when it comes to auth in production mode
+
+  res.cookie("newUser", "", { maxAge: 1000 * 60 * 60 * 24 });
+  res.send("you get the cookies!");
+});
+
+app.get("/read-cookies", (req, res) => {
+  const cookies = req.cookies;
+  console.log(cookies.newUser);
+
+  res.json(cookies);
+});

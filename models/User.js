@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Please enter a password"],
+    required: [true, "Please enter password"],
     minlength: [3, "Minimum password length is 3 character"],
   },
 });
@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
 // Here we're gonna hash password before saving data to the db.
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt(); // $2b$10$
+  // const salt = 12; // default = 10
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
