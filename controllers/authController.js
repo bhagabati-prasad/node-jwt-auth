@@ -53,5 +53,14 @@ module.exports.login_get = (req, res) => {
 };
 
 module.exports.login_post = async (req, res) => {
-  res.render("login");
+  const { username, password } = req.body;
+  // we can't use User.login({username, password}) to login.
+  // but, we can create a static method inside User schema.
+
+  try {
+    const user = await User.login(username, password);
+    res.status(200).json({ user: user._id });
+  } catch (err) {
+    res.status(400).json({});
+  }
 };
