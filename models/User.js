@@ -30,11 +30,11 @@ userSchema.post("save", (doc, next) => {
 });
 
 // static method to login user
-userSchema.static.login = async function (username, password) {
+userSchema.statics.login = async function (username, password) {
   const user = await this.findOne({ username });
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
-    if (user) {
+    if (auth) {
       return user;
     }
     throw Error("incorrect password");

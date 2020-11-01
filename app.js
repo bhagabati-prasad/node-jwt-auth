@@ -1,11 +1,16 @@
 const express = require("express");
-const path = require("path");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+
+// configure envirenment variables
 const dotenv = require("dotenv");
 dotenv.config();
+
+// set view engine
 const hbs = require("hbs");
 const authRoutes = require("./routes/authRoutes");
+const { requireAuth } = require("./midddlewares/authMiddleware");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -32,7 +37,7 @@ mongoose
 // routes
 app.get("/", (req, res) => res.render("index"));
 app.get("/about", (req, res) => res.render("about"));
-app.get("/dashboard", (req, res) => res.render("dashboard"));
+app.get("/dashboard", requireAuth, (req, res) => res.render("dashboard"));
 app.use(authRoutes);
 
 // -------- Unnecessary codes. Only for knowledge --------------

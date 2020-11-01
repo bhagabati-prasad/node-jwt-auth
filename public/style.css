@@ -18,6 +18,11 @@ header {
   border-bottom: 1px solid #444;
 }
 
+header nav {
+  display: flex;
+  justify-content: space-around;
+}
+
 header a {
   color: #222;
   text-decoration: none;
@@ -34,6 +39,11 @@ header a#logo {
   font-weight: bold;
   letter-spacing: 1px;
   border: none;
+}
+
+header nav div.button a {
+  background-color: teal;
+  color: #fff;
 }
 
 /* home */
@@ -89,6 +99,9 @@ form button {
 form span.error {
   color: tomato;
   display: block;
+}
+form p {
+  margin-top: 14px;
 }
 
 /* footer */
