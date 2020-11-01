@@ -4,7 +4,7 @@
   "description": "jwt authentication with nodejs mongodb\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C and mongodb\u001b[D\u001b[C\u001b[C\u001b[C\u001bb",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon app.js -e js,hbs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bhagabati Prasad",

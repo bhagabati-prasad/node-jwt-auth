@@ -9,7 +9,7 @@ dotenv.config();
 // set view engine
 const hbs = require("hbs");
 const authRoutes = require("./routes/authRoutes");
-const { requireAuth } = require("./midddlewares/authMiddleware");
+const { requireAuth, checkUser } = require("./midddlewares/authMiddleware");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -35,10 +35,12 @@ mongoose
   .catch((err) => console.log(err));
 
 // routes
+app.get("*", checkUser); // applies middleware to all routes
 app.get("/", (req, res) => res.render("index"));
 app.get("/about", (req, res) => res.render("about"));
 app.get("/dashboard", requireAuth, (req, res) => res.render("dashboard"));
 app.use(authRoutes);
+app.get("*", (req, res) => res.render("error"));
 
 // -------- Unnecessary codes. Only for knowledge --------------
 app.get("/set-cookies", (req, res) => {
